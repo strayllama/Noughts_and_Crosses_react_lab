@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.button-box {
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+  border: solid 1px black;
+  text-align: center;
+  vertical-align: bottom;
+}
+
+.button-box img {
+  height: 200px;
+  width: 200px;
+}
+
+.game-board {
+  width: 606px;
+}
