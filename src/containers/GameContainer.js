@@ -7,7 +7,9 @@ class GameContainer extends Component {
     this.state = {
       buttons: [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
       turn: 1,
-      gameWonYet: false
+      gameWonYet: false,
+      crossesScore: 0,
+      noughtsScore: 0
     }
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleResetClick = this.handleResetClick.bind(this);
@@ -37,6 +39,9 @@ class GameContainer extends Component {
       if (combo === 3 || combo === 30){
         //this.setState({ gameWonYet: true }); // WHHHY
         this.state.gameWonYet = true;
+        if (combo === 3) {
+          this.setState(({ crossesScore }) => ({ crossesScore: crossesScore + 1 }))
+        }
       }
     }
     this.setMessageBox()
@@ -48,7 +53,7 @@ class GameContainer extends Component {
     for(let button of this.state.buttons) {
       total += button;
     }
-    const messageBox = document.getElementById('message-box')
+    const messageBox = document.getElementById('message-box');
     if (!this.state.gameWonYet) {
       if (total === 45){
         messageBox.textContent = "A Draw, you both lose!";
@@ -75,6 +80,7 @@ class GameContainer extends Component {
 
 
   handleButtonClick(value, index) {
+    console.log('HANDLE click function has been executed');
     if (value === 0 && this.state.gameWonYet === false) {
       this.setButtonClickChoice(index);
       this.changeTurn();
@@ -103,6 +109,7 @@ class GameContainer extends Component {
     return (
       <div className="game-container">
         <header><h1>n0ughts and Xrosses</h1></header>
+        <p id="scoreboard">Scores Crosses-{this.state.crossesScore}, Noughts-{this.state.noughtsScore}</p>
         <p id="message-box">GAME READY: player of X's goes first!</p>
         <button
           type="button"
